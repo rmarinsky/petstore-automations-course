@@ -34,7 +34,7 @@ public class PetCreationTests {
         var petByIdResponse = petController.getPetById(targetPet.getId());
         PetDto actualPet = petByIdResponse.as(PetDto.class);
 
-        Assertions.assertEquals(targetPetName, actualPet);
+        Assertions.assertEquals(targetPet, actualPet);
         Assertions.assertEquals(200, petByIdResponse.statusCode());
     }
 
