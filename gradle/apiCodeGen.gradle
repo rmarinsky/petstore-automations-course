@@ -2,16 +2,7 @@ def mainResources = "src/main/resources"
 
 ext {
     petApiDir = file("$buildDir/pet-api")
-    storeApiDir = file("$buildDir/pet-api")
     petSpecFile = file("$buildDir/petSpec.json")
-}
-
-def getEnv() {
-
-}
-
-def petStoreApiPreparion() {
-
 }
 
 
@@ -26,25 +17,12 @@ swaggerSources {
 
     mkdir("build")
 
-    def petStoreUrl = "https://petstore.${getEnv()}swagger.io/v2/swagger.json"
-
-    def storeStoreUrl = "https://petstore.swagger.io/v2/swagger.json"
-
+    def petStoreUrl = "https://petstore.swagger.io/v2/swagger.json"
 
     println "Generation models from: $petStoreUrl"
     petSpecFile.write(new URL(petStoreUrl).text)
 
     petApi {
-        inputFile = petSpecFile
-
-        code {
-            configFile = file("$mainResources/swagger/pet-config.json")
-
-            outputDir = petApiDir
-        }
-    }
-
-    storeApi {
         inputFile = petSpecFile
 
         code {
