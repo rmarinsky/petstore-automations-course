@@ -1,0 +1,30 @@
+/*//todo cos of https://github.com/assertj/assertj-assertions-generator/issues/122
+task cleanAssertionClass(type: Delete) {
+    delete "$buildDir/pet-api/src/main/java/io/swagger/petstore/asserts/Assertions.java"
+}*/
+
+assertjGen {
+    packages = ['com.swagger.petstore.models']
+
+    generateAssertionsInPackage = 'com.swagger.petstore.asserts'
+    targetDir = "$buildDir/pet-api/src/main/java/"
+
+    quiet = false
+    hierarchical = false
+    excludes = { "com.swagger.petstore.models.Order" }
+
+    generatedSourcesScope = 'main'
+    generateBddAssertions = false
+    generateJUnitSoftAssertions = false
+    generateSoftAssertions = false
+
+    generateAssertionsForAllFields = true
+
+    cleanTargetDir = false
+}
+
+//generateSwaggerCode.finalizedBy 'assertjGen'
+
+//compileJava.dependsOn 'generateSwaggerCode'
+
+//tasks.named('assertjGen').get().finalizedBy("cleanAssertionClass")

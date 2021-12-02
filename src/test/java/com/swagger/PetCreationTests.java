@@ -2,6 +2,8 @@ package com.swagger;
 
 import com.github.javafaker.Faker;
 import com.swagger.api.controller.PetController;
+import com.swagger.api.controller.PetServiceErrors;
+import com.swagger.api.controller.common.ResponseExpectMessages;
 import com.swagger.petstore.models.Pet;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -40,17 +42,11 @@ public class PetCreationTests {
 
         Assertions.assertEquals(200, createPetResponse.statusCode());
 
-        var petByIdResponse = petController.getPetById(targetPet.getId());
-        Pet actualPet = petByIdResponse.as(Pet.class);
 
-        Assertions.assertEquals(targetPet, actualPet);
-        Assertions.assertEquals(200, petByIdResponse.statusCode());
-    }
-
-    private void extracted(Pet targetPetName, Pet actualPet) {
-        Assertions.assertEquals(targetPetName, actualPet.getName());
-        Assertions.assertEquals(targetPetName, actualPet.getName());
-        Assertions.assertEquals(targetPetName, actualPet.getName());
+        petController.getPetById(targetPet.getId())
+                .statusCodeIsEqualTo(ResponseExpectMessages.StatusCode.CONFLICT)
+                .errorMessageIsEqual(PetServiceErrors.ExpiredPromo)
+                .responseFieldsAreEqualTo(new Pet(), "date", "id");
     }
 
 }
