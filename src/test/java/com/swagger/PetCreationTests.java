@@ -27,7 +27,7 @@ public class PetCreationTests {
     }
 
     Faker faker = new Faker();
-    PetController petController = new PetController();
+    PetController petController = new PetController().withToken(faker.number().digit());
 
     @Test
     @DisplayName("Creation of a new pet via API")
@@ -41,7 +41,6 @@ public class PetCreationTests {
                 .addNewPetToStore(targetPet);
 
         Assertions.assertEquals(200, createPetResponse.statusCode());
-
 
         petController.getPetById(targetPet.getId())
                 .statusCodeIsEqualTo(ResponseExpectMessages.StatusCode.CONFLICT)

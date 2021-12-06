@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class PetController extends BaseController {
+public class PetController extends BaseController<PetController> {
 
 
     private RequestSpecification petApi() {
