@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'org.hidetake.swagger.generator' version '2.18.2'
-    id "com.github.opengl-BOBO.assertjGen2" version "2.0.0"
+//    id "com.github.opengl-BOBO.assertjGen2" version "2.0.0"
 }
 
 group 'com.swagger'
@@ -9,7 +9,6 @@ version '0.1'
 
 apply from: "gradle/apiCodeGen.gradle"
 apply from: "gradle/dependencies.gradle"
-apply from: "gradle/assertjGen.gradle"
 
 repositories {
     mavenCentral()
@@ -18,6 +17,8 @@ repositories {
 sourceSets {
     main.java.srcDirs "${petApiDir.path}/src/main/java"
 }
+
+compileJava.dependsOn 'generateSwaggerCode'
 
 test {
     useJUnitPlatform()

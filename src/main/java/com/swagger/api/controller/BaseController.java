@@ -1,12 +1,14 @@
 package com.swagger.api.controller;
 
+import com.swagger.api.controller.common.ErrorReponse;
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 
 public abstract class BaseController<T> {
-
+    
     private String authToken;
 
     public RequestSpecification petStoreApiClient(String basePath) {

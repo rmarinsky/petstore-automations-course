@@ -5,6 +5,6 @@
   "groupId": "com.swagger",
   "artifactId": "petstore",
   "artifactVersion": "3.0.0",
-  "library": "rest-assured",
+  "library": "resttemplate",
   "hideGenerationTimestamp": true
 }

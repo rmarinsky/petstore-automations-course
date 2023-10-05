@@ -32,4 +32,16 @@ swaggerSources {
         }
     }
 
+    oloApi {
+         inputFile = petSpecFile
+
+        code {
+            configFile = file("$mainResources/swagger/pet-config.json")
+
+            outputDir = petApiDir
+        }
+
+    }
+
+
 }
